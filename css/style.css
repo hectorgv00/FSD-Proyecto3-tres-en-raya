@@ -48,12 +48,25 @@ body{
 
 }
 
+.altura-iconos{
+    height: 1.5em;
+    transition: all 0.3s linear;
+}
 
 
+.color-naranja{
+    color: #FFCA2C;
+
+}
+
+.color-naranja:hover{
+    color: #FFCA2C;
+}
 
 
-
-
+a{
+    text-decoration: none;
+}
 
 .max-height-40vh{
     min-height: 20vh;
