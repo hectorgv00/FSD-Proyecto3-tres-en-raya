@@ -17,9 +17,7 @@ body{
     font-family: 'Fira Sans Condensed', sans-serif;
 }
 
-.color-white{
-    color: #fff;
-}
+
 
 .noOpacity-hover{
     opacity: 0;
@@ -59,6 +57,23 @@ body{
 
 }
 
+.color-azul-electrico{
+    color: rgb(87, 156, 240);
+    text-shadow: 0 0 10px rgb(87, 156, 240);
+    font-size: 6rem;
+
+}
+
+.overflowHidden{
+    overflow: hidden;
+}
+
+.color-naranja-electrico{
+    color: #FFCA2C;
+    text-shadow: 0 0 10px #FFCA2C;
+    font-size: 6rem;
+}
+
 .color-naranja:hover{
     color: #FFCA2C;
 }
@@ -82,6 +97,10 @@ a{
     animation: glitch 0.25s ease-out ;
 
     
+}
+
+.color-white{
+    color: #fff;
 }
 
 @keyframes glitch {
@@ -121,4 +140,12 @@ a{
         -1em 0 0 yellow,
         0.5em 0 0 yellowgreen;;
     }
+}
+
+#grid-start{
+    width: 70vh;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
