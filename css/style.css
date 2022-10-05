@@ -59,6 +59,10 @@ body{
 
 }
 
+.color-azul{
+    color: rgb(87, 156, 240);
+
+}
 
 .color-azul-electrico{
     color: rgb(87, 156, 240);
@@ -86,20 +90,17 @@ a{
     text-decoration: none;
 }
 
-.max-height-40vh{
-    min-height: 20vh;
-    width: 20vw;
-    transition: all 1s ease-in;
-}
-
-.max-height-40vh:hover{
-    width: 80vw;
+.max-width-50{
+    max-width: 50%;
 }
 
 .efecto-glitch:hover{
     animation: glitch 0.25s ease-out ;
-
     
+}
+
+.pointer{
+    cursor: pointer;
 }
 
 .color-white{
