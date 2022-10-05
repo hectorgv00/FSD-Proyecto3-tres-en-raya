@@ -2,6 +2,8 @@ body{
     margin: 0;
     padding: 0%;
     box-sizing: border-box;
+    background-color: black;
+
 
 }
 
@@ -56,6 +58,7 @@ body{
     color: #FFCA2C;
 
 }
+
 
 .color-azul-electrico{
     color: rgb(87, 156, 240);
