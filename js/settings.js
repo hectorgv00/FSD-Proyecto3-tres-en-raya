@@ -11,7 +11,7 @@ let jugador2 = {
 
     // Añadir el nombre a jugador 1 y 2
 
-document.getElementById("boton-input-jugador-1").addEventListener("click", function agregarNombreJugador1(){
+document.getElementById("boton-input-jugador-1").addEventListener("click",  agregarNombreJugador1=()=>{
     let inputNombre = document.getElementById("input-jugador-1");
     let placeholderJugador1 = document.getElementById("header-jugador1");
     
@@ -25,7 +25,7 @@ document.getElementById("boton-input-jugador-1").addEventListener("click", funct
 
 })
 
-document.getElementById("boton-input-jugador-2").addEventListener("click", function agregarNombreJugador2(){
+document.getElementById("boton-input-jugador-2").addEventListener("click",  agregarNombreJugador2=()=>{
     let inputNombre = document.getElementById("input-jugador-2");
     let placeholderJugador2 = document.getElementById("header-jugador2");
     jugador2.nombre = inputNombre.value;

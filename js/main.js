@@ -23,7 +23,7 @@ let casilla33 =  document.getElementById("cuadro33")
 
 
 
-casilla11.addEventListener("click", let = Cambiocasilla=>(
+casilla11.addEventListener("click", Cambiocasilla=>(
     document.getElementById("texto-11").innerHTML = "X"
 ));
 
