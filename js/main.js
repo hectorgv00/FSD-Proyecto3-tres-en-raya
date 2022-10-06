@@ -1,38 +1,33 @@
-let jugador1 = {
-    nombre: "",
-    puntos: "",
+let y1 = ["0","0","0"]
+let y2 = ["0","0","0"]
+let y3 = ["0","0","0"]
 
-}
-
-let jugador2 = {
-    nombre: "",
-    puntos: "",
-
-}
+let cuadricula =[y1,y2,y3]
 
 
 
-document.getElementById("boton-input-jugador-1").addEventListener("click", function agregarNombreJugador1(){
-    let inputNombre = document.getElementById("input-jugador-1");
-    let placeholderJugador1 = document.getElementById("header-jugador1");
-    
-    jugador1.nombre = inputNombre.value;
-    inputNombre.value = "";
-    placeholderJugador1.innerHTML = jugador1.nombre;
+// -------------------------------------------------------------------------------------
 
-    // LocalStorage
+    // Cambiar las casillas
 
-        localStorage.setItem("jugador1", jugador1.nombre);
+let casilla11 =  document.getElementById("cuadro11")
+let casilla12 =  document.getElementById("cuadro12")
+let casilla13 =  document.getElementById("cuadro13")
+let casilla21 =  document.getElementById("cuadro21")
+let casilla22 =  document.getElementById("cuadro22")
+let casilla23 =  document.getElementById("cuadro23")
+let casilla31 =  document.getElementById("cuadro31")
+let casilla32 =  document.getElementById("cuadro32")
+let casilla33 =  document.getElementById("cuadro33")
 
-})
 
-document.getElementById("boton-input-jugador-2").addEventListener("click", function agregarNombreJugador2(){
-    let inputNombre = document.getElementById("input-jugador-2");
-    let placeholderJugador2 = document.getElementById("header-jugador2");
-    jugador2.nombre = inputNombre.value;
-    inputNombre.value = "";
-    placeholderJugador2.innerHTML = jugador2.nombre;
-})
+
+
+casilla11.addEventListener("click", let = Cambiocasilla=>(
+    document.getElementById("texto-11").innerHTML = "X"
+));
+
+
 
 
 
