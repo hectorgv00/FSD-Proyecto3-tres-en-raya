@@ -6,6 +6,10 @@ let cuadricula =[y1,y2,y3]
 
 
 
+// Lo que yo he utilizado para el local storage:  listaJugadores = JSON.parse(localStorage.getItem('NOMBRE_QUE_LE_QUERAIS_DAR')); /  localStorage.setItem('NOMBRE_QUE_LE_QUERAIS_DAR', JSON.stringify(listaJugadores));
+
+
+
 // -------------------------------------------------------------------------------------
 
     // Cambiar las casillas
