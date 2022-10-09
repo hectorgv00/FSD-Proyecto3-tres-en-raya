@@ -29,9 +29,6 @@ body{
     opacity: 100;
 }
 
-.em4{
-    font-size: 4em;
-}
 
 .StartSettingsVS{
     color: #fff;
@@ -80,6 +77,11 @@ body{
     text-shadow: 0 0 10px #FFCA2C;
     font-size: 6rem;
 }
+
+.em4{
+    font-size: 4em;
+}
+
 
 .color-naranja:hover{
     color: #FFCA2C;
