@@ -71,7 +71,10 @@ let contadorTurnos =0;
 
 
 const BucleJuego =()=>{
-
+    if(sessionStorage.getItem("jugador1") == null){
+        alert("Introduce el nombre del jugador 1 y 2")
+    }else{
+    interruptor=true;
     for (let i = 0; i < cuadricula.length; i++) {
         cuadricula[i] = "";
     }
@@ -80,6 +83,11 @@ const BucleJuego =()=>{
     textoMuestra.innerHTML= `Turno de ${sessionStorage.getItem("jugador1")}`
     textCasillas()
     
+
+
+
+
+}
 }
 
 
