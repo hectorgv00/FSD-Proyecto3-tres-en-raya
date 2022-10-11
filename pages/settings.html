@@ -54,7 +54,10 @@
                     <div class="input-group d-flex justify-content-center">
                         <input
                             id="input-jugador-1"
+                            name="input-jugador-1"
                             type="text"
+                            pattern="[^()/><\][\\\x22,;|]+"
+                            maxlength="20"
                             class="form-control max-width-50"
                             placeholder="Jugador 1"
                             aria-describedby="input-group-right">
@@ -90,7 +93,10 @@
                 <div class="input-group d-flex justify-content-center">
                     <input
                     id="input-jugador-2"
+                        name="input-jugador-2"
                         type="text"
+                        pattern="[^()/><\][\\\x22,;|]+"
+                        maxlength="20"
                         class="form-control max-width-50"
                         placeholder="Jugador 2"
                         aria-describedby="input-group-right">
