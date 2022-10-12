@@ -71,14 +71,16 @@ const clickCasillaVacia=(casilla,index)=>{
     }
 }
 
-const clickCasillaElemento=(casilla)=>{
+const clickCasillaElemento=(casilla,index)=>{
   if(casilla.innerHTML == '<h3 class="color-naranja-electrico efecto-glitch">X</h3>'&& interruptor == true){
     casilla.innerHTML = "";
     arrayDeX.shift()
+    cuadricula[index] = "";
     console.log("Quitamos X");
 }else if(casilla.innerHTML == '<h3 class="color-azul-electrico efecto-glitch">O</h3>'&& interruptor == false) {
     casilla.innerHTML = "";
     arrayDeO.shift()
+    cuadricula[index] = "";
     console.log("Quitamos O");
 }
 }
@@ -92,7 +94,7 @@ let contadorTurnos = 0;
 // Comienza el juego/se resetea el juego
 
 const BucleJuego = () => {
-  if (sessionStorage.getItem("jugador1") == null) {
+  if (sessionStorage.getItem("jugador1") == null||sessionStorage.getItem("jugador2") == null) {
     alert("Introduce el nombre del jugador 1 y 2");
   } else {
     interruptor = true;
@@ -141,7 +143,7 @@ const checkWinner = ()=>{
 
 
 
-    setTimeout(()=>{location.href="../pages/winner.html"}, 1000)
+    setTimeout(()=>{location.href="../pages/winner.html"}, 500)
     
     
   }
