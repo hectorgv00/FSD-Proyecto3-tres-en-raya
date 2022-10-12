@@ -14,16 +14,24 @@ let placeholderJugador2 = document.getElementById("header-jugador2");
 
 
 
-let añadirNombreJugador1 = document.getElementById("boton-input-jugador-1").addEventListener("click",  agregarNombreJugador1=()=>{
+let añadirNombreJugador1 = document.getElementById("boton-input-jugador-1").addEventListener("click",  ()=>{
  
     
     nombreJugador1 = inputNombre1.value;
+
     inputNombre1.value = "";
 
     // SessionStorage
 
         sessionStorage.setItem("jugador1", nombreJugador1);
         placeholderJugador1.innerHTML = sessionStorage.getItem("jugador1");
+
+    // Easter egg
+    
+        if(nombreJugador1 == "Joan Macarra"){
+        sessionStorage.setItem("ganador", sessionStorage.getItem("jugador1"))
+        location.href="../pages/winner.html"
+    }
 
 })
 
