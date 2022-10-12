@@ -42,8 +42,8 @@
                 </div>
                 <div
                     class="col-12 col-lg-3 d-flex  justify-content-center align-items-center font-family-anton">
-                    <h4 id="header-jugador1" class="efecto-glitch color-naranja ">Jugador1</h4>
-                    <h4 id="header-jugador2" class="color-azul ms-3  efecto-glitch">Jugador2</h4>
+                    <h4 id="header-jugador1" class="efecto-glitch color-naranja "></h4>
+                    <h4 id="header-jugador2" class="color-azul ms-3  efecto-glitch"></h4>
                 </div>
             </div>
             <div class="row">
@@ -65,19 +65,11 @@
 
                         <div class="container-fluid">
                             <di class="row">
-                                <div class="col d-flex mt-4 justify-content-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label color-white" for="exampleRadios1">
-                                          Humano
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input ms-5" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                        <label class="form-check-label color-white ms-1" for="exampleRadios2">
-                                          CPU
-                                        </label>
-                                      </div>
+                                <div class="col d-flex mt-4 justify-content-center align-items-center">
+                     
+                                    <input type="radio" name="jugador1" id="radioJugador1-humano" onclick="elegirRadioJugador1()" checked> <p class="color-white mb-0 ms-1"> Humano</p>
+                                    <input type="radio" name="jugador1" id="radioJugador1-cpu" onclick="elegirRadioJugador1()" class="ms-5
+                                    "> <p class="color-white mb-0 ms-1"> CPU</p>
                                       
                                       
                                 </div>
@@ -105,18 +97,9 @@
                     <div class="container-fluid">
                         <di class="row">
                             <div class="col d-flex mt-4 justify-content-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label color-white" for="flexRadioDefault1">
-                                      Humano
-                                    </label>
-                                  </div>
-                                  <div class="form-check ms-5">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                    <label class="form-check-label color-white" for="flexRadioDefault2">
-                                      CPU
-                                    </label>
-                                  </div>
+
+                                <input type="radio" name="jugador2" id="radioJugador2-humano" onclick="elegirRadioJugador1()" > <p class="color-white mb-0 ms-1"> Humano</p>
+                                <input type="radio" name="jugador2" id="radioJugador2-cpu" onclick="elegirRadioJugador1()" class="ms-5" checked> <p class="color-white mb-0 ms-1"> CPU</p>
                                   
                             </div>
                         </di>
