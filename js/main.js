@@ -96,6 +96,8 @@ const clickCasillaElemento=(casilla,index)=>{
 
 let contadorTurnos = 0;
 
+
+
 // Comienza el juego/se resetea el juego
 
 let medidorPuntos;
