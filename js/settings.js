@@ -6,8 +6,6 @@ class Jugador {
     }
   }
   
-
-
 // -------------------------------Nombres Jugadores------------------------------
 
 let inputNombre1 = document.getElementById("input-jugador-1");
@@ -20,8 +18,6 @@ let placeholderJugador2 = document.getElementById("header-jugador2");
     // Añadir objeto jugador 1 y 2
 
             // Jugador 1
-
-
 
 let añadirNombreJugador1 = document.getElementById("boton-input-jugador-1").addEventListener("click",  ()=>{
  

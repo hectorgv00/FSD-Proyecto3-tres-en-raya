@@ -3,8 +3,10 @@ let cuadricula = ["", "", "", "", "", "", "", "", ""];
 let arrayDeX = []; //For para recorrer array cuadricula y pushee las X a este array
 let arrayDeO = []; //For para recorrer array cuadricula y pushee las O a este array
 
+
 const botonStart = document.getElementById("boton-start");
 const textoMuestra = document.getElementById("texto-muestra");
+const placeholderContador = document.getElementById("contador");
 
 const winCondition = [
   [0, 1, 2],
@@ -62,12 +64,14 @@ const clickCasillaVacia=(casilla,index)=>{
         cuadricula[index] = "X";
         arrayDeX.push(cuadricula[index]);
         contadorTurnos +=1;
+        placeholderContador.innerHTML =contadorTurnos;
         checkWinner()
     } else {
         textoMuestra.innerHTML = `Turno de <span class="color-naranja">${objectJugador1Clean.nombre}</span>`;
         cuadricula[index] = "O";
         arrayDeO.push(cuadricula[index]);
         contadorTurnos +=1;
+        placeholderContador.innerHTML=contadorTurnos;
         checkWinner()
     }
 
@@ -82,12 +86,10 @@ const clickCasillaElemento=(casilla,index)=>{
     casilla.innerHTML = "";
     arrayDeX.shift()
     cuadricula[index] = "";
-    contadorTurnos +=1;
 }else if(casilla.innerHTML == '<h3 class="color-azul-electrico efecto-glitch">O</h3>'&& interruptor == false) {
     casilla.innerHTML = "";
     arrayDeO.shift()
     cuadricula[index] = "";
-    contadorTurnos +=1;
 }
 }
 
