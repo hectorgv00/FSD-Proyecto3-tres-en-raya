@@ -1,10 +1,27 @@
+// Objeto Jugador 1
+
+let objectJugador1DesJSON = sessionStorage.getItem("jugador1Object");
+let objectJugador1Clean = JSON.parse(objectJugador1DesJSON);
+let turnoJugador1 = `Turno de <span class="color-naranja">${sessionStorage.getItem("jugador1")}</span>`;
+
+// Objeto Jugador2
+
+let objectJugador2DesJSON = sessionStorage.getItem("jugador2Object");
+let objectJugador2Clean = JSON.parse(objectJugador2DesJSON);
+let turnoJugador2 =`Turno de <span class="color-azul">${sessionStorage.getItem("jugador2")}</span>`;
+
+
+// X y O
+
+let xNaranja = '<h3 class="color-naranja-electrico efecto-glitch">X</h3>';
+let oAzul = '<h3 class="color-azul-electrico efecto-glitch">O</h3>';
+
+// Arrays
+
 let cuadricula = ["", "", "", "", "", "", "", "", ""];
 let arrayDeX = []; //For para recorrer array cuadricula y pushee las X a este array
 let arrayDeO = []; //For para recorrer array cuadricula y pushee las O a este array
-
-const botonStart = document.getElementById("boton-start");
-const textoMuestra = document.getElementById("texto-muestra");
-const placeholderContador = document.getElementById("contador");
+let aleatorio=0;
 
 const winCondition = [
   [0, 1, 2],
@@ -17,11 +34,25 @@ const winCondition = [
   [2, 4, 6],
 ];
 
+
+// DOM
+
+const botonStart = document.getElementById("boton-start");
+const textoMuestra = document.getElementById("texto-muestra");
+const placeholderContador = document.getElementById("contador");
+
+// Medidor de puntos/turnos y stop;
+
+let medidorPuntos;
+let punto = 0;
+let contadorTurnos = 0;
+const stopMedidorPuntos = () => clearInterval(medidorPuntos);
+
 // Comienza el juego/se resetea el juego
 
 const BucleJuego = () => {
   medidorPuntos = setInterval(() => {
-    punto = punto + 1;
+    punto = punto++;
   }, 1000);
   // Comprobador si se han insertado los nombres
   if (
@@ -31,10 +62,8 @@ const BucleJuego = () => {
     alert("Introduce el nombre del jugador 1 y 2");
   } else {
       reset();
- 
       textCasillas();
-    
-  }
+    }
 };
 
 // Limpia los arrays y el innerHTML de las casillas para poder volver a jugar al darle start
@@ -44,26 +73,11 @@ const reset = () =>{
   for (let i = 0; i < cuadricula.length; i++) {
     cuadricula[i] = "";
   }
-  casillas.map((casilla) => {
-    casilla.innerHTML = "";
-  });
+  casillas.map((casilla) => {casilla.innerHTML = "";});
   arrayDeX.length = 0;
   arrayDeO.length = 0;
-
-  textoMuestra.innerHTML = `Turno de <span class="color-naranja">${sessionStorage.getItem(
-    "jugador1"
-  )}</span>`;
+  textoMuestra.innerHTML = turnoJugador1;
 }
-
-// Objeto Jugador 1
-
-let objectJugador1DesJSON = sessionStorage.getItem("jugador1Object");
-let objectJugador1Clean = JSON.parse(objectJugador1DesJSON);
-
-// Objeto Jugador2
-
-let objectJugador2DesJSON = sessionStorage.getItem("jugador2Object");
-let objectJugador2Clean = JSON.parse(objectJugador2DesJSON);
 
 
 // Cambiar las casillas
@@ -72,6 +86,17 @@ let casillas = Array.from(document.getElementsByClassName("casilla"));
 let interruptor = true;
 
 const textCasillas = () => {
+  if(objectJugador1Clean.humano == false && objectJugador2Clean.humano == true){
+    // Primera ficha CPU vs Jugador 2
+    document.getElementsByClassName("casilla")[aleatorio].innerHTML = xNaranja;
+    textoMuestra.innerHTML = turnoJugador2;
+    cuadricula[aleatorio] = "X";
+    arrayDeX.push(cuadricula[aleatorio]);
+    contadorTurnos += 1;
+    placeholderContador.innerHTML = contadorTurnos;
+}
+
+// Mapeo de casillas para el Add event listener
   casillas.map((casilla, index) => {
     casilla.addEventListener("click", () => {
       if (arrayDeX.length >= 3 && arrayDeO.length >= 3) {
@@ -80,7 +105,7 @@ const textCasillas = () => {
         } else if (objectJugador1Clean.humano == true && objectJugador2Clean.humano == false) {
           clickCasillaElementoJ1VCpu(casilla, index);
         }else if(objectJugador1Clean.humano == false && objectJugador2Clean.humano == true){
-
+          clickCasillaElementoCPUVJ2(casilla,index);
         }
       } else {
         if (objectJugador1Clean.humano == true && objectJugador2Clean.humano == true) {
@@ -88,7 +113,6 @@ const textCasillas = () => {
         } else if (objectJugador1Clean.humano == true && objectJugador2Clean.humano == false) {
           clickCasillaVaciaJ1VCpu(casilla, index);
         }else if(objectJugador1Clean.humano == false && objectJugador2Clean.humano == true){
-          console.log("CPU vs humano");
           clickCasillaVaciaCPUVJ2(casilla,index);
         }
       }
@@ -102,106 +126,85 @@ const textCasillas = () => {
 
 const clickCasillaVacia = (casilla, index) => {
   if (casilla.innerHTML == "") {
-    casilla.innerHTML = interruptor
-      ? '<h3 class="color-naranja-electrico efecto-glitch">X</h3>'
-      : '<h3 class="color-azul-electrico efecto-glitch">O</h3>';
     if (interruptor) {
-      textoMuestra.innerHTML = `Turno de <span class="color-azul">${sessionStorage.getItem(
-        "jugador2"
-      )}</span>`;
-      cuadricula[index] = "X";
-      arrayDeX.push(cuadricula[index]);
-      contadorTurnos += 1;
-      placeholderContador.innerHTML = contadorTurnos;
-      checkWinner();
+      pintarCasillaVacia(casilla,xNaranja,turnoJugador2,"X",arrayDeX,index)
     } else {
-      textoMuestra.innerHTML = `Turno de <span class="color-naranja">${sessionStorage.getItem(
-        "jugador1"
-      )}</span>`;
-      cuadricula[index] = "O";
-      arrayDeO.push(cuadricula[index]);
-      contadorTurnos += 1;
-      placeholderContador.innerHTML = contadorTurnos;
-      checkWinner();
+      pintarCasillaVacia(casilla,oAzul,turnoJugador1,"O",arrayDeO,index)
     }
-    interruptor = !interruptor;
   }
 };
 
+// Pinta la casilla en la que se haga click
+
+const pintarCasillaVacia=(casilla,color,jugador,ficha,arrayDe,index)=>{
+  casilla.innerHTML=color;
+  textoMuestra.innerHTML = jugador;
+  cuadricula[index] = ficha;
+  arrayDe.push(cuadricula[index]);
+  contadorTurnos += 1;
+  placeholderContador.innerHTML = contadorTurnos;
+  checkWinner();
+  interruptor = !interruptor;
+
+}
 
 // click en una casilla con elemento J1 vs J2
 
 const clickCasillaElemento = (casilla, index) => {
-  if (
-    casilla.innerHTML ==
-      '<h3 class="color-naranja-electrico efecto-glitch">X</h3>' &&
-    interruptor == true
-  ) {
-    casilla.innerHTML = "";
-    arrayDeX.shift();
-    cuadricula[index] = "";
-  } else if (
-    casilla.innerHTML ==
-      '<h3 class="color-azul-electrico efecto-glitch">O</h3>' &&
-    interruptor == false
-  ) {
-    casilla.innerHTML = "";
-    arrayDeO.shift();
-    cuadricula[index] = "";
+  if (casilla.innerHTML == xNaranja && interruptor == true) {
+    borraCasillaElementoJ(casilla,arrayDeX,index)
+  } else if (casilla.innerHTML == oAzul && interruptor == false) {
+    borraCasillaElementoJ(casilla,arrayDeO,index)
   }
 };
 
+// Borra la casilla JvJ
+
+const borraCasillaElementoJ=(casilla,arrayDe,index)=>{
+  casilla.innerHTML = "";
+  arrayDe.shift();
+  cuadricula[index] = "";
+}
 
 // Casilla Vacia J1 vs Cpu
 
-let aleatorio=0;
 
 const clickCasillaVaciaJ1VCpu = (casilla, index) => {
   if (casilla.innerHTML == "") {
-    casilla.innerHTML = interruptor? '<h3 class="color-naranja-electrico efecto-glitch">X</h3>': '<h3 class="color-azul-electrico efecto-glitch">O</h3>';
     if (interruptor) {
-      textoMuestra.innerHTML = `Turno de <span class="color-azul">${sessionStorage.getItem(
-        "jugador2"
-      )}</span>`;
-      cuadricula[index] = "X";
-      arrayDeX.push(cuadricula[index]);
-      contadorTurnos += 1;
-      placeholderContador.innerHTML = contadorTurnos;
-      checkWinner();
-      interruptor = !interruptor;
+      pintarCasillaVacia(casilla,xNaranja,turnoJugador2,"X",arrayDeX,index);
       setTimeout(()=>{
-        let aleatorio = parseInt(Math.random() *10);
-        while(cuadricula[aleatorio] !=""){
-          aleatorio = parseInt(Math.random() *10);
-        }
-        casillas[aleatorio].innerHTML = '<h3 class="color-azul-electrico efecto-glitch">O</h3>';
-        textoMuestra.innerHTML = `Turno de <span class="color-naranja">${sessionStorage.getItem(
-          "jugador1"
-        )}</span>`;
-        cuadricula[aleatorio] = "O"
-        arrayDeO.push(cuadricula[aleatorio]);
-        contadorTurnos += 1;
-        placeholderContador.innerHTML = contadorTurnos;
-        checkWinner();
-        interruptor = !interruptor;
-      }, 1500)
 
-    }
-    
+      pintarCasillaCPU(oAzul,turnoJugador1,"O");
+    }, 1500)
+
   }
 };
+
+// Pinta casilla para CPU
+const pintarCasillaCPU=(color,jugador,ficha)=>{
+    let aleatorio = parseInt(Math.random() *10);
+    while(cuadricula[aleatorio] !=""){
+      aleatorio = parseInt(Math.random() *10);
+    }
+    casillas[aleatorio].innerHTML = color;
+    textoMuestra.innerHTML = jugador;
+    cuadricula[aleatorio] = ficha;
+    arrayDeO.push(cuadricula[aleatorio]);
+    contadorTurnos += 1;
+    placeholderContador.innerHTML = contadorTurnos;
+    checkWinner();
+    interruptor = !interruptor;
+
+}
+}
 
 // Casilla con elemento J1 vs CPU
 
 const clickCasillaElementoJ1VCpu = (casilla, index) => {
-  if (
-    casilla.innerHTML ==
-      '<h3 class="color-naranja-electrico efecto-glitch">X</h3>' &&
-    interruptor == true
-  ) {
-    casilla.innerHTML = "";
-    arrayDeX.shift();
-    cuadricula[index] = "";
+  if (casilla.innerHTML == xNaranja && interruptor == true) {
+    borraCasillaElementoJ(casilla,arrayDeX,index)
+
 
     setTimeout(() => {
       aleatorio = parseInt(Math.random() *10);
@@ -219,69 +222,79 @@ const clickCasillaElementoJ1VCpu = (casilla, index) => {
 
 // Casilla vacia CPU vs J2
 
-const clickCasillaVaciaCPUVJ2 = (casilla, index) => {
-  aleatorio= parseInt(Math.random()*10);
-  if (cuadricula[aleatorio] == "") {
-    console.log("Las cosas");
-    casillas[aleatorio].click();
-    casillas[aleatorio].innerHTML = interruptor? '<h3 class="color-naranja-electrico efecto-glitch">X</h3>': '<h3 class="color-azul-electrico efecto-glitch">O</h3>';
-    if (interruptor) {
-      textoMuestra.innerHTML = `Turno de <span class="color-azul">${sessionStorage.getItem(
-        "jugador2"
-      )}</span>`;
-      cuadricula[aleatorio] = "X";
-      arrayDeX.push(cuadricula[aleatorio]);
+const clickCasillaVaciaCPUVJ2 = (casilla,index) => {
+  if (casilla.innerHTML == "") {
+    interruptor=!interruptor;
+    casilla.innerHTML = interruptor? xNaranja: oAzul;
+    if (!interruptor) {
+      textoMuestra.innerHTML = turnoJugador1;
+      cuadricula[index] = "O";
+      arrayDeO.push(cuadricula[index]);
       contadorTurnos += 1;
       placeholderContador.innerHTML = contadorTurnos;
       checkWinner();
+      console.log("Ha llegado hasta aqui");
+
       interruptor = !interruptor;
+      if(arrayDeX.length<3 && arrayDeO.length<3){
       setTimeout(()=>{
         let aleatorio = parseInt(Math.random() *10);
         while(cuadricula[aleatorio] !=""){
           aleatorio = parseInt(Math.random() *10);
         }
-        casillas[aleatorio].innerHTML = '<h3 class="color-azul-electrico efecto-glitch">O</h3>';
-        textoMuestra.innerHTML = `Turno de <span class="color-naranja">${sessionStorage.getItem(
-          "jugador1"
-        )}</span>`;
-        cuadricula[aleatorio] = "O"
-        arrayDeO.push(cuadricula[aleatorio]);
+        casillas[aleatorio].innerHTML =xNaranja;
+        textoMuestra.innerHTML = turnoJugador2;
+        cuadricula[aleatorio] = "X"
+        arrayDeX.push(cuadricula[aleatorio]);
+        contadorTurnos += 1;
+        placeholderContador.innerHTML = contadorTurnos;
+        checkWinner();
+      }, 1500)
+      }else{ setTimeout(() => {
+        aleatorio = parseInt(Math.random() *10);
+        while(cuadricula[aleatorio] !='X'){
+          aleatorio = parseInt(Math.random() *10);
+        }
+        casillas[aleatorio].innerHTML = "";
+        arrayDeX.shift();
+        cuadricula[aleatorio] = "";
+      }, 1000);
+      
+      setTimeout(()=>{
+        let aleatorio = parseInt(Math.random() *10);
+        while(cuadricula[aleatorio] !=""){
+          aleatorio = parseInt(Math.random() *10);
+        }
+        casillas[aleatorio].innerHTML = xNaranja;
+
+        textoMuestra.innerHTML = turnoJugador2;
+
+        cuadricula[aleatorio] = "X";
+        arrayDeX.push(cuadricula[aleatorio]);
         contadorTurnos += 1;
         placeholderContador.innerHTML = contadorTurnos;
         checkWinner();
         interruptor = !interruptor;
       }, 1500)
-
+      
+    }
     }
     
   }
 };
 
+const clickCasillaElementoCPUVJ2 = (casilla, index) => {
+  if (casilla.innerHTML == oAzul && interruptor == false) {
+    casilla.innerHTML = "";
+    arrayDeO.shift();
+    cuadricula[index] = "";
+    interruptor = !interruptor;
+    }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let medidorPuntos;
-let punto = 0;
-let contadorTurnos = 0;
-const stopMedidorPuntos = () => clearInterval(medidorPuntos);
 
 const checkWinner = () => {
   let ganado = false;
-
   for (let i = 0; i < winCondition.length; i++) {
     let condicion = winCondition[i];
     let opcionA = cuadricula[condicion[0]];
@@ -295,36 +308,31 @@ const checkWinner = () => {
       ganado = true;
       break;
     }
-  }
-
+  }  
   if (ganado == true) {
     if (interruptor == true) {
-      textoMuestra.innerHTML = `Ha ganado <span class="color-naranja">${sessionStorage.getItem(
-        "jugador1"
-      )}</span>`;
-      sessionStorage.setItem(
-        "ganador",
-        `<span class="color-naranja">${sessionStorage.getItem(
-          "jugador1"
-        )}</span>`
-      );
-      sessionStorage.setItem("puntosGanador", punto + contadorTurnos);
-      sessionStorage.setItem("puntosGanadorJ1", punto + contadorTurnos);
-      sessionStorage.setItem("puntosGanadorJ2", contadorTurnos - punto);
-      stopMedidorPuntos();
+      ganadorJ1();
     } else {
-      textoMuestra.innerHTML = `Ha ganado <span class="color-azul">${sessionStorage.getItem(
-        "jugador2"
-      )}</span>`;
-      sessionStorage.setItem(
-        "ganador",
-        `<span class="color-azul">${sessionStorage.getItem("jugador2")}</span>`
-      );
-      sessionStorage.setItem("puntosGanador", punto + contadorTurnos);
-      sessionStorage.setItem("puntosGanadorJ2", punto + contadorTurnos);
-      sessionStorage.setItem("puntosGanadorJ1", contadorTurnos - punto);
-      stopMedidorPuntos();
+      ganadorJ2();
     }
     location.href = "../pages/winner.html";
   }
 };
+
+const ganadorJ1=()=>{
+  textoMuestra.innerHTML = `Ha ganado <span class="color-naranja">${sessionStorage.getItem("jugador1")}</span>`;
+  sessionStorage.setItem("ganador",`<span class="color-naranja">${sessionStorage.getItem("jugador1")}</span>`);
+  sessionStorage.setItem("puntosGanador", punto + contadorTurnos);
+  sessionStorage.setItem("puntosGanadorJ1", punto + contadorTurnos);
+  sessionStorage.setItem("puntosGanadorJ2", contadorTurnos - punto);
+  stopMedidorPuntos();
+}
+
+const ganadorJ2=()=>{
+  textoMuestra.innerHTML = `Ha ganado <span class="color-azul">${sessionStorage.getItem("jugador2")}</span>`;
+  sessionStorage.setItem("ganador",`<span class="color-azul">${sessionStorage.getItem("jugador2")}</span>`);
+  sessionStorage.setItem("puntosGanador", punto + contadorTurnos);
+  sessionStorage.setItem("puntosGanadorJ2", punto + contadorTurnos);
+  sessionStorage.setItem("puntosGanadorJ1", contadorTurnos - punto);
+  stopMedidorPuntos();
+}
