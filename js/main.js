@@ -22,6 +22,9 @@ let cuadricula = ["", "", "", "", "", "", "", "", ""];
 let arrayDeX = []; //For para recorrer array cuadricula y pushee las X a este array
 let arrayDeO = []; //For para recorrer array cuadricula y pushee las O a este array
 let aleatorio=0;
+let casillas = Array.from(document.getElementsByClassName("casilla"));
+let interruptor = true;
+
 
 const winCondition = [
   [0, 1, 2],
@@ -82,8 +85,6 @@ const reset = () =>{
 
 // Cambiar las casillas
 
-let casillas = Array.from(document.getElementsByClassName("casilla"));
-let interruptor = true;
 
 const textCasillas = () => {
   if(objectJugador1Clean.humano == false && objectJugador2Clean.humano == true){
@@ -205,7 +206,6 @@ const clickCasillaElementoJ1VCpu = (casilla, index) => {
   if (casilla.innerHTML == xNaranja && interruptor == true) {
     borraCasillaElementoJ(casilla,arrayDeX,index)
 
-
     setTimeout(() => {
       aleatorio = parseInt(Math.random() *10);
       while(cuadricula[aleatorio] !='O'){
@@ -219,23 +219,13 @@ const clickCasillaElementoJ1VCpu = (casilla, index) => {
   }
 };
 
-
 // Casilla vacia CPU vs J2
 
 const clickCasillaVaciaCPUVJ2 = (casilla,index) => {
   if (casilla.innerHTML == "") {
     interruptor=!interruptor;
-    casilla.innerHTML = interruptor? xNaranja: oAzul;
     if (!interruptor) {
-      textoMuestra.innerHTML = turnoJugador1;
-      cuadricula[index] = "O";
-      arrayDeO.push(cuadricula[index]);
-      contadorTurnos += 1;
-      placeholderContador.innerHTML = contadorTurnos;
-      checkWinner();
-      console.log("Ha llegado hasta aqui");
-
-      interruptor = !interruptor;
+      pintarCasillaVacia(casilla,oAzul,turnoJugador1,"O",arrayDeO,index)
       if(arrayDeX.length<3 && arrayDeO.length<3){
       setTimeout(()=>{
         let aleatorio = parseInt(Math.random() *10);
