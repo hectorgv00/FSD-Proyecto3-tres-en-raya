@@ -55,7 +55,7 @@ const stopMedidorPuntos = () => clearInterval(medidorPuntos);
 
 const BucleJuego = () => {
   medidorPuntos = setInterval(() => {
-    punto = punto++;
+    punto = punto +1;
   }, 1000);
   // Comprobador si se han insertado los nombres
   if (
@@ -314,7 +314,7 @@ const ganadorJ1=()=>{
   sessionStorage.setItem("ganador",`<span class="color-naranja">${sessionStorage.getItem("jugador1")}</span>`);
   sessionStorage.setItem("puntosGanador", punto + contadorTurnos);
   sessionStorage.setItem("puntosGanadorJ1", punto + contadorTurnos);
-  sessionStorage.setItem("puntosGanadorJ2", contadorTurnos - punto);
+  sessionStorage.setItem("puntosGanadorJ2", punto - contadorTurnos);
   stopMedidorPuntos();
 }
 
@@ -323,6 +323,6 @@ const ganadorJ2=()=>{
   sessionStorage.setItem("ganador",`<span class="color-azul">${sessionStorage.getItem("jugador2")}</span>`);
   sessionStorage.setItem("puntosGanador", punto + contadorTurnos);
   sessionStorage.setItem("puntosGanadorJ2", punto + contadorTurnos);
-  sessionStorage.setItem("puntosGanadorJ1", contadorTurnos - punto);
+  sessionStorage.setItem("puntosGanadorJ1", punto - contadorTurnos);
   stopMedidorPuntos();
 }
