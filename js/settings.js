@@ -6,8 +6,7 @@ class Jugador {
     }
 }
 
-// -------------------------------Nombres
-// Jugadores------------------------------
+// -------------------------------Nombres Jugadores------------------------------
 
 let inputNombre1 = document.getElementById("input-jugador-1");
 let placeholderJugador1 = document.getElementById("header-jugador1");
@@ -53,6 +52,10 @@ let añadirNombreJugador2 = document
     .addEventListener("click", () => {
         nombreJugador2 = inputNombre2.value;
         inputNombre2.value = "";
+        if(radioHumanoJugador1.checked == false && radioHumanoJugador2.checked == false){
+            alert("No podemos dejar que la CPU juege contra si misma, puede ser peligroso... Por favor, para evitar que se vuelva demasiado inteligente, escoge Humano vs Humano, Humano vs CPU o CPU vs Humano. No queremos que vuelva a pasar...")
+        }
+        
 
         // SessionStorage
 
@@ -76,20 +79,3 @@ placeholderJugador2.innerHTML = sessionStorage.getItem("jugador2");
 let radioHumanoJugador1 = document.getElementById("radioJugador1-humano");
 let radioHumanoJugador2 = document.getElementById("radioJugador2-humano");
 
-radioHumanoJugador1.checked
-    ? console.log("Humano")
-    : console.log("Robot");
-radioHumanoJugador2.checked
-    ? console.log("Humano")
-    : console.log("Robot");
-
-const elegirRadioJugador1 = () => {
-    radioHumanoJugador1.checked
-        ? console.log("Humano")
-        : console.log("Robot");
-};
-const elegirRadioJugador2 = () => {
-    radioHumanoJugador2.checked
-        ? console.log("Humano")
-        : console.log("Robot");
-};
