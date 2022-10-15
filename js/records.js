@@ -7,7 +7,7 @@ placeholderJugador1.innerHTML = sessionStorage.getItem("jugador1");
 placeholderJugador2.innerHTML = sessionStorage.getItem("jugador2");
 
 let puntos1 = 0;
-let puntos2 =0;
+let puntos2 = 0;
 puntos1 += parseInt(sessionStorage.getItem("puntosGanadorJ1"))
 puntos2 += parseInt(sessionStorage.getItem("puntosGanadorJ2"))
 
