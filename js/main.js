@@ -160,46 +160,33 @@ const clickCasillaVaciaJ1VCpu = (casilla, index) => {
         if (interruptor) {
             pintarCasillaVacia(casilla, xNaranja, turnoJugador2, "X", arrayDeX, index);
             setTimeout(() => {
-                pintarCasillaCPU(oAzul, turnoJugador1, "O");
-            }, 1500)
+                if(arrayDeX.length==3 && arrayDeO.length==3){
+                    aleatorio = parseInt(Math.random() * 10);
+                    while (cuadricula[aleatorio] != 'O') {
+                        aleatorio = parseInt(Math.random() * 10);
+                    }
+                    casillas[aleatorio].innerHTML = "";
+                    arrayDeO.shift();
+                    cuadricula[aleatorio] = "";
+                }
+                setTimeout(() => {
+                    pintarCasillaCPU(oAzul, turnoJugador1, "O");
+                }, 1000);
+            }, 500)
 
         }
     };
 
-    // Pinta casilla para CPU
-    const pintarCasillaCPU = (color, jugador, ficha) => {
-        let aleatorio = parseInt(Math.random() * 10);
-        while (cuadricula[aleatorio] != "") {
-            aleatorio = parseInt(Math.random() * 10);
-        }
-        casillas[aleatorio].innerHTML = color;
-        textoMuestra.innerHTML = jugador;
-        cuadricula[aleatorio] = ficha;
-        arrayDeO.push(cuadricula[aleatorio]);
-        contadorTurnos += 1;
-        placeholderContador.innerHTML = contadorTurnos;
-        checkWinner();
-        interruptor = !interruptor;
 
-    }
 }
+
+
 
 // Casilla con elemento J1 vs CPU
 
 const clickCasillaElementoJ1VCpu = (casilla, index) => {
     if (casilla.innerHTML == xNaranja && interruptor == true) {
         borraCasillaElementoJ(casilla, arrayDeX, index)
-
-        setTimeout(() => {
-            aleatorio = parseInt(Math.random() * 10);
-            while (cuadricula[aleatorio] != 'O') {
-                aleatorio = parseInt(Math.random() * 10);
-            }
-            casillas[aleatorio].innerHTML = "";
-            arrayDeO.shift();
-            cuadricula[aleatorio] = "";
-        }, 1000);
-
     }
 };
 
@@ -255,6 +242,23 @@ const clickCasillaVaciaCPUVJ2 = (casilla, index) => {
 
     }
 };
+
+    // Pinta casilla para CPU
+const pintarCasillaCPU = (color, jugador, ficha) => {
+        let aleatorio = parseInt(Math.random() * 10);
+        while (cuadricula[aleatorio] != "") {
+            aleatorio = parseInt(Math.random() * 10);
+        }
+        casillas[aleatorio].innerHTML = color;
+        textoMuestra.innerHTML = jugador;
+        cuadricula[aleatorio] = ficha;
+        arrayDeO.push(cuadricula[aleatorio]);
+        contadorTurnos += 1;
+        placeholderContador.innerHTML = contadorTurnos;
+        checkWinner();
+        interruptor = !interruptor;
+
+}
 
 const clickCasillaElementoCPUVJ2 = (casilla, index) => {
     if (casilla.innerHTML == oAzul && interruptor == false) {
