@@ -60,8 +60,7 @@ const BucleJuego = () => {
     }
 };
 
-// Limpia los arrays y el innerHTML de las casillas para poder volver a jugar al
-// darle start
+// Limpia los arrays y el innerHTML de las casillas para poder volver a jugar al darle start
 
 const reset = () => {
     interruptor = true;
@@ -79,6 +78,7 @@ const reset = () => {
 const textCasillas = () => {
     if (objectJugador1Clean.humano == false && objectJugador2Clean.humano == true) {
         // Primera ficha CPU vs Jugador 2
+        aleatorio = parseInt(Math.random() * 9);
         document.getElementsByClassName("casilla")[aleatorio].innerHTML = xNaranja;
         textoMuestra.innerHTML = turnoJugador2;
         cuadricula[aleatorio] = "X";
@@ -87,7 +87,8 @@ const textCasillas = () => {
         placeholderContador.innerHTML = contadorTurnos;
     }
 
-    // Mapeo de casillas para el Add event listener
+// Mapeo de casillas para el Add event listener
+
     casillas.map((casilla, index) => {
         casilla.addEventListener("click", () => {
             if (arrayDeX.length >= 3 && arrayDeO.length >= 3) {
@@ -163,10 +164,7 @@ const clickCasillaVaciaJ1VCpu = (casilla, index) => {
             pintarCasillaVacia(casilla, xNaranja, turnoJugador2, "X", arrayDeX, index);
             setTimeout(() => {
                 if(arrayDeX.length==3 && arrayDeO.length==3){
-                    aleatorio = parseInt(Math.random() * 10);
-                    while (cuadricula[aleatorio] != 'O') {
-                        aleatorio = parseInt(Math.random() * 10);
-                    }
+                    randomizer('O');
                     casillas[aleatorio].innerHTML = "";
                     arrayDeO.shift();
                     cuadricula[aleatorio] = "";
@@ -201,10 +199,7 @@ const clickCasillaVaciaCPUVJ2 = (casilla, index) => {
             pintarCasillaVacia(casilla, oAzul, turnoJugador1, "O", arrayDeO, index)
             if (arrayDeX.length < 3 && arrayDeO.length < 3) {
                 setTimeout(() => {
-                    let aleatorio = parseInt(Math.random() * 10);
-                    while (cuadricula[aleatorio] != "") {
-                        aleatorio = parseInt(Math.random() * 10);
-                    }
+                    randomizer('');
                     casillas[aleatorio].innerHTML = xNaranja;
                     textoMuestra.innerHTML = turnoJugador2;
                     cuadricula[aleatorio] = "X"
@@ -215,20 +210,14 @@ const clickCasillaVaciaCPUVJ2 = (casilla, index) => {
                 }, 1500)
             } else {
                 setTimeout(() => {
-                    aleatorio = parseInt(Math.random() * 10);
-                    while (cuadricula[aleatorio] != 'X') {
-                        aleatorio = parseInt(Math.random() * 10);
-                    }
+                    randomizer('X');
                     casillas[aleatorio].innerHTML = "";
                     arrayDeX.shift();
                     cuadricula[aleatorio] = "";
                 }, 1000);
 
                 setTimeout(() => {
-                    let aleatorio = parseInt(Math.random() * 10);
-                    while (cuadricula[aleatorio] != "") {
-                        aleatorio = parseInt(Math.random() * 10);
-                    }
+                    randomizer("");
                     casillas[aleatorio].innerHTML = xNaranja;
                     textoMuestra.innerHTML = turnoJugador2;
                     cuadricula[aleatorio] = "X";
@@ -245,12 +234,10 @@ const clickCasillaVaciaCPUVJ2 = (casilla, index) => {
     }
 };
 
-    // Pinta casilla para CPU
+// Pinta casilla para CPU
+
 const pintarCasillaCPU = (color, jugador, ficha) => {
-        let aleatorio = parseInt(Math.random() * 10);
-        while (cuadricula[aleatorio] != "") {
-            aleatorio = parseInt(Math.random() * 10);
-        }
+        randomizer("");
         casillas[aleatorio].innerHTML = color;
         textoMuestra.innerHTML = jugador;
         cuadricula[aleatorio] = ficha;
@@ -260,6 +247,13 @@ const pintarCasillaCPU = (color, jugador, ficha) => {
         checkWinner();
         interruptor = !interruptor;
 
+}
+
+const randomizer =(fichaHueco)=>{
+    aleatorio = parseInt(Math.random() * 9);
+    while (cuadricula[aleatorio] != fichaHueco) {
+        aleatorio = parseInt(Math.random() * 9);
+    }
 }
 
 const clickCasillaElementoCPUVJ2 = (casilla, index) => {
