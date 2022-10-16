@@ -52,6 +52,8 @@ const BucleJuego = () => {
 
     if (sessionStorage.getItem("jugador1") == null || sessionStorage.getItem("jugador2") == null) {
         alert("Introduce el nombre del jugador 1 y 2");
+        location.href = "../pages/settings.html";
+
     } else {
         reset();
         textCasillas();
