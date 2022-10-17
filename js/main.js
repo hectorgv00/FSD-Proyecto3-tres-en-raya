@@ -50,7 +50,7 @@ const BucleJuego = () => {
     }, 1000);
     // Comprobador si se han insertado los nombres
 
-    if (sessionStorage.getItem("jugador1") == null || sessionStorage.getItem("jugador2") == null) {
+    if (sessionStorage.getItem("jugador1") == null ||sessionStorage.getItem("jugador1") == "" || sessionStorage.getItem("jugador2") == null || sessionStorage.getItem("jugador2") == "") {
         alert("Introduce el nombre del jugador 1 y 2");
         location.href = "../pages/settings.html";
 
@@ -77,7 +77,9 @@ const reset = () => {
 
 const textCasillas = () => {
     if (objectJugador1Clean.humano == false && objectJugador2Clean.humano == true) {
+        
         // Primera ficha CPU vs Jugador 2
+        
         aleatorio = parseInt(Math.random() * 9);
         document.getElementsByClassName("casilla")[aleatorio].innerHTML = xNaranja;
         textoMuestra.innerHTML = turnoJugador2;
